@@ -1,5 +1,4 @@
-from flask import Flask
-
+from flask import Flask 
 
 app = Flask(__name__)
 
@@ -11,9 +10,14 @@ def welcome():
 def hello():
     return 'Hello, World'
 
+#---
+#Ejercicio 1
+
 @app.route('/saludos/<nombre>')
 def saludar(nombre):
     return f'Hola {nombre}'
+
+##Ejercicio 2
 
 @app.route('/suma/<int:n1>/<int:n2>')
 def suma(n1,n2):
