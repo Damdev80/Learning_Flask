@@ -44,6 +44,27 @@ def personalizado():
     return f'The value of my cookie is {cookie_value}',201
     
 #Ejercicio 5
+#___
+
+#Ejercicio 6
+@app.route('/api/datos', methods=['GET','POST'])
+def api():
+    info = {"nombre": "Flask", "Version": "2.1"}
+    show_info = jsonify(info)
+    return show_info
+    
+
+@app.route('/api/saludo/<string:nombre>', methods=['GET', 'POST'])
+def saludos(nombre):
+    return [
+        {
+            'Saludo': f'{nombre}'
+        }
+    ]
+    
+
+#Ejercicio 7
+
 
 
 if __name__ == "__main__":
