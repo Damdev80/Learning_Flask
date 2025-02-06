@@ -33,16 +33,17 @@ def suma(n1,n2):
 def infomation():
     show_header = request.headers
     show_conexion_sure = request.is_secure
-    return jsonify({"headers": dict(show_header), "is_secure": show_conexion_sure})
+    return jsonify({"headers": dict(show_header), "is_secure": show_conexion_sure}) #! Importante usar el dict() por que si no te dara error.
 
 #Ejercicio 4
 @app.route('/personalizado', methods=['GET', 'POST'])
 def personalizado():
     my_cookie = make_response("Configurando cookie")
     my_cookie.set_cookie('Valor', ' Hola soy una cookie')
-    return my_cookie,201
+    cookie_value = request.cookies.get('Valor', 'No hay cookie configurada') #?El segundo valor  por si la cookie no tiene valor.
+    return f'The value of my cookie is {cookie_value}',201
     
-    
+#Ejercicio 5
 
 
 if __name__ == "__main__":
