@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response 
 
 
 
@@ -35,7 +35,12 @@ def infomation():
     show_conexion_sure = request.is_secure
     return jsonify({"headers": dict(show_header), "is_secure": show_conexion_sure})
 
-
+#Ejercicio 4
+@app.route('/personalizado', methods=['GET', 'POST'])
+def personalizado():
+    my_cookie = make_response("Configurando cookie")
+    my_cookie.set_cookie('Valor', ' Hola soy una cookie')
+    return my_cookie,201
     
     
 
