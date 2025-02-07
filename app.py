@@ -58,13 +58,21 @@ def api():
 def saludos(nombre):
     return [
         {
-            'Saludo': f'{nombre}'
+            'Saludo': f'{nombre}' #? Otra forma de usar json!
         }
     ]
     
 
 #Ejercicio 7
-
+@app.route('/usuario', methods=['GET', 'POST'])
+def get_data():
+    prueba = request.method
+    if prueba == 'GET':
+        return "Lista de usuarios"
+    elif prueba == 'POST':
+        return "Usuario creado"
+    else:
+        return "Método no permitido", 405 #Código de estado HTTP 405 (Method Not Allowed)
 
 
 if __name__ == "__main__":
