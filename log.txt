@@ -1,0 +1,5 @@
+[2025-02-07 14:58:40] Método: GET, URL: http://127.0.0.1:5000/
+[2025-02-07 14:58:40] Método: GET, URL: http://127.0.0.1:5000/favicon.ico
+[2025-02-07 14:58:54] Método: GET, URL: http://127.0.0.1:5000/app_notas
+[2025-02-07 14:59:04] Método: GET, URL: http://127.0.0.1:5000/app_notas/1
+[2025-02-07 15:11:13] Método: GET, URL: http://127.0.0.1:5000/favicon.ico

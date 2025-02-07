@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, make_response 
-
+import datetime
 
 
 
@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route("/")
 def welcome():
     return "<h1> ¡Bienvenido a Flask! </h1>"
+
 
 @app.route('/hello')
 def hello():
@@ -44,7 +45,35 @@ def personalizado():
     return f'The value of my cookie is {cookie_value}',201
     
 #Ejercicio 5
-#___
+@app.before_request
+def registrar_acceso():
+    # Obtener el método HTTP y la URL solicitada
+    metodo = request.method
+    url = request.url
+
+    # Obtener la fecha y hora actual
+    ahora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Registrar la información en el archivo log.txt
+    with open("log.txt", "a") as archivo_log:
+        archivo_log.write(f"[{ahora}] Método: {metodo}, URL: {url}\n")
+
+# Hook after_request: Agrega el encabezado X-Powered-By a todas las respuestas
+@app.after_request
+def agregar_encabezado(response):
+    # Agregar el encabezado personalizado
+    response.headers['X-Powered-By'] = 'Flask'
+    return response
+
+# Ruta de prueba
+@app.route('/')
+def inicio():
+    return "¡Bienvenido a la aplicación Flask!"
+
+# Ruta de prueba adicional
+@app.route('/test')
+def test():
+    return "Esta es una ruta de prueba."  
 
 #Ejercicio 6
 @app.route('/api/datos', methods=['GET','POST'])
@@ -72,7 +101,42 @@ def get_data():
     elif prueba == 'POST':
         return "Usuario creado"
     else:
-        return "Método no permitido", 405 #Código de estado HTTP 405 (Method Not Allowed)
+        return "Método no permitido", 405 #?Código de estado HTTP 405 (Method Not Allowed)
+    
+
+@app.route('/app_notas/<int:nota>', methods=['GET', 'POST', 'DELETE'])
+def app_notas(Nueva_nota, Nota_Eliminada,nota):
+    Validacion  = request.method
+    if  Validacion == 'GET':
+        return [
+            {
+                'Notas': 5.0
+            }
+        ]
+    elif Validacion == 'POST':
+        return [
+            {
+                Nueva_nota: 3.5
+            }
+        ]
+    elif Validacion == 'DELETE':
+        return [
+            {
+                Nota_Eliminada: Nueva_nota
+            }
+        ]
+    elif Validacion == 'GET' and Validacion == 'int' :
+        return[
+            {
+                'Tu nota': nota
+            }
+        ]
+    else:
+        return 'Metodo no admitido.', 405
+    
+        
+        
+        
 
 
 if __name__ == "__main__":
